@@ -1,0 +1,79 @@
+/*
+con el body retoco el color del fondo y centro el contenedor
+*/
+body{
+  font-family: Arial;
+  background:#879cb8;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:600px;
+}
+/*
+cambio el color del contenedor para diferenciarlo con el padding otorgo separacion con los bordes 
+le doy el aspecto redondeado 
+*/
+.container{
+  background:rgb(252, 252, 252);
+  padding:20px;
+  border-radius:10px;
+  width:300px;
+}
+
+h2{
+  text-align:center;
+}
+/*
+destaca la separacion con el boton de añadir y el margen con la lista*/
+.texto-Añadir{
+  display:flex;
+  gap:10px;
+  margin-bottom:15px;
+}
+/*
+bordes */
+input{
+  flex:1;
+  padding:8px;
+  border-radius:5px;
+  border:2px solid #687dda;
+}
+/*
+el puto boton de añadir mi niño 
+*/
+button{
+  background:#687dda;
+  color:white;
+  border:none;
+  padding:8px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
+/*
+las propiedades de el <li> para que este alineado como en la actividad 
+*/
+li{
+  display:flex;
+  justify-content:space-between;
+  background:#eeeeee;
+  padding:8px;
+  margin-bottom:6px;
+  border-radius:6px;
+}
+/*
+para cuando el el js se crea el nuevo <li> para darle el color y todo al boton de borrar
+*/
+.borrar{
+  background:#c40606;
+  border:none;
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
+  padding:4px 8px;
+}
+/*
+la X que esta dentro del <li> que pidio alejandro en clase 
+*/
+.rojo{
+ background:#ec8282;
+}

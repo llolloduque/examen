@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Práctica Completa JavaScript</title>
+
+<style>
+  body {
+    font-family: Arial;
+    text-align: center;
+    margin: 20px;
+  }
+
+  button {
+    margin: 5px;
+    padding: 8px;
+  }
+
+  .seccion {
+    border: 2px solid #ccc;
+    padding: 15px;
+    margin: 20px;
+  }
+
+  /* Semáforo */
+  .circulo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: gray;
+    margin: 5px auto;
+  }
+
+  /* Barra progreso */
+  #contenedorBarra {
+    width: 300px;
+    border: 1px solid black;
+    margin: auto;
+  }
+
+  #barra {
+    width: 0%;
+    height: 20px;
+    background: green;
+  }
+
+</style>
+</head>
+
+<body>
+
+<h1>📘 Práctica Completa JavaScript</h1>
+
+<!-- ================= EJERCICIO 1 ================= -->
+<div class="seccion">
+<h2>1. Mostrar mensaje</h2>
+<button id="btn1">Click</button>
+<p id="res1"></p>
+</div>
+
+<!-- ================= EJERCICIO 2 ================= -->
+<div class="seccion">
+<h2>2. Cambiar color</h2>
+<p id="texto2">Texto de ejemplo</p>
+<button id="btn2">Cambiar</button>
+</div>
+
+<!-- ================= EJERCICIO 3 ================= -->
+<div class="seccion">
+<h2>3. Contador</h2>
+<button id="btn3">Sumar</button>
+<p id="res3">0</p>
+</div>
+
+<!-- ================= EJERCICIO 4 ================= -->
+<div class="seccion">
+<h2>4. Hora actual</h2>
+<button id="btn4">Ver hora</button>
+<p id="res4"></p>
+</div>
+
+<!-- ================= EJERCICIO 5 ================= -->
+<div class="seccion">
+<h2>5. Saludo</h2>
+<input id="nombre5" placeholder="Tu nombre">
+<button id="btn5">Saludar</button>
+<p id="res5"></p>
+</div>
+
+<!-- ================= EJERCICIO 6 ================= -->
+<div class="seccion">
+<h2>6. Suma</h2>
+<input id="num1" type="number">
+<input id="num2" type="number">
+<button id="btn6">Sumar</button>
+<p id="res6"></p>
+</div>
+
+<!-- ================= EJERCICIO 7 ================= -->
+<div class="seccion">
+<h2>7. Ocultar / Mostrar</h2>
+<p id="texto7">Hola mundo</p>
+<button id="btn7">Ocultar</button>
+</div>
+
+<!-- ================= EJERCICIO 8 ================= -->
+<div class="seccion">
+<h2>8. Imagen</h2>
+<img id="img8" src="https://picsum.photos/200/150">
+<br>
+<button id="btn8">Cambiar imagen</button>
+</div>
+
+<!-- ================= EJERCICIO 9 ================= -->
+<div class="seccion">
+<h2>9. Lista</h2>
+<input id="input9">
+<button id="btn9">Añadir</button>
+<ul id="lista9"></ul>
+</div>
+
+<!-- ================= EJERCICIO 10 ================= -->
+<div class="seccion">
+<h2>10. Semáforo</h2>
+<div id="luz" class="circulo"></div>
+<button id="btn10">Siguiente</button>
+<p id="res10"></p>
+</div>
+
+<!-- ================= TIEMPO ================= -->
+
+<div class="seccion">
+<h2>Reloj automático</h2>
+<p id="reloj"></p>
+</div>
+
+<div class="seccion">
+<h2>Cuenta atrás</h2>
+<button onclick="iniciarCuenta()">Iniciar</button>
+<p id="cuenta"></p>
+</div>
+
+<div class="seccion">
+<h2>Parpadeo</h2>
+<p id="parpadeo">Parpadeo</p>
+<button onclick="iniciarParpadeo()">Iniciar</button>
+<button onclick="detenerParpadeo()">Detener</button>
+</div>
+
+<div class="seccion">
+<h2>Barra progreso</h2>
+<div id="contenedorBarra">
+  <div id="barra"></div>
+</div>
+<button onclick="iniciarBarra()">Iniciar</button>
+<p id="resBarra"></p>
+</div>
+
+<div class="seccion">
+<h2>Juego número</h2>
+<p id="numero">0</p>
+<button onclick="jugar()">Jugar</button>
+<button onclick="parar()">Parar</button>
+<p id="resJuego"></p>
+</div>
+
+<script>
+
+/// ================= EJERCICIO 1 =================
+document.getElementById("btn1").onclick = function() {
+  document.getElementById("res1").innerHTML = "¡Hola Clase!"
+}
+
+/// ================= EJERCICIO 2 =================
+document.getElementById("btn2").onclick = function() {
+  document.getElementById("texto2").style.color = "red"
+}
+
+/// ================= EJERCICIO 3 =================
+let contador = 0
+document.getElementById("btn3").onclick = function() {
+  contador++
+  document.getElementById("res3").innerHTML = contador
+}
+
+/// ================= EJERCICIO 4 =================
+document.getElementById("btn4").onclick = function() {
+  let ahora = new Date()
+  document.getElementById("res4").innerHTML = ahora.toLocaleTimeString()
+}
+
+/// ================= EJERCICIO 5 =================
+document.getElementById("btn5").onclick = function() {
+  let nombre = document.getElementById("nombre5").value
+  document.getElementById("res5").innerHTML = "Hola " + nombre
+}
+
+/// ================= EJERCICIO 6 =================
+document.getElementById("btn6").onclick = function() {
+  let a = Number(document.getElementById("num1").value)
+  let b = Number(document.getElementById("num2").value)
+  document.getElementById("res6").innerHTML = a + b
+}
+
+/// ================= EJERCICIO 7 =================
+let visible = true
+document.getElementById("btn7").onclick = function() {
+  let texto = document.getElementById("texto7")
+
+  if (visible) {
+    texto.style.display = "none"
+    this.innerHTML = "Mostrar"
+  } else {
+    texto.style.display = "block"
+    this.innerHTML = "Ocultar"
+  }
+
+  visible = !visible
+}
+
+/// ================= EJERCICIO 8 =================
+document.getElementById("btn8").onclick = function() {
+  document.getElementById("img8").src = "https://picsum.photos/200/150?random=2"
+}
+
+/// ================= EJERCICIO 9 =================
+document.getElementById("btn9").onclick = function() {
+  let input = document.getElementById("input9")
+  let lista = document.getElementById("lista9")
+
+  lista.innerHTML += "<li>" + input.value + "</li>"
+  input.value = ""
+}
+
+/// ================= EJERCICIO 10 =================
+let estado = 0
+const colores = ["red", "orange", "green"]
+const textos = ["Stop", "Atención", "Adelante"]
+
+document.getElementById("btn10").onclick = function() {
+  estado = (estado + 1) % 3
+  document.getElementById("luz").style.background = colores[estado]
+  document.getElementById("res10").innerHTML = textos[estado]
+}
+
+/// ================= RELOJ =================
+function actualizarHora() {
+  document.getElementById("reloj").innerHTML = new Date().toLocaleTimeString()
+}
+setInterval(actualizarHora, 1000)
+actualizarHora()
+
+/// ================= CUENTA ATRÁS =================
+let intervaloCuenta
+function iniciarCuenta() {
+  let num = 10
+  clearInterval(intervaloCuenta)
+
+  intervaloCuenta = setInterval(function() {
+    num--
+    document.getElementById("cuenta").innerHTML = num
+
+    if (num === 0) {
+      clearInterval(intervaloCuenta)
+      document.getElementById("cuenta").innerHTML = "¡Tiempo!"
+    }
+  }, 1000)
+}
+
+/// ================= PARPADEO =================
+let intervaloParpadeo
+let visibleParpadeo = true
+
+function iniciarParpadeo() {
+  intervaloParpadeo = setInterval(function() {
+    visibleParpadeo = !visibleParpadeo
+    document.getElementById("parpadeo").style.visibility =
+      visibleParpadeo ? "visible" : "hidden"
+  }, 500)
+}
+
+function detenerParpadeo() {
+  clearInterval(intervaloParpadeo)
+}
+
+/// ================= BARRA =================
+let progreso = 0
+let intervaloBarra
+
+function iniciarBarra() {
+  progreso = 0
+  clearInterval(intervaloBarra)
+
+  intervaloBarra = setInterval(function() {
+    progreso++
+    document.getElementById("barra").style.width = progreso + "%"
+
+    if (progreso >= 100) {
+      clearInterval(intervaloBarra)
+      document.getElementById("resBarra").innerHTML = "Completado"
+    }
+  }, 100)
+}
+
+/// ================= JUEGO =================
+let intervaloJuego
+let numeroActual = 0
+
+function jugar() {
+  intervaloJuego = setInterval(function() {
+    numeroActual = Math.floor(Math.random() * 10) + 1
+    document.getElementById("numero").innerHTML = numeroActual
+  }, 200)
+}
+
+function parar() {
+  clearInterval(intervaloJuego)
+
+  if (numeroActual === 7) {
+    document.getElementById("resJuego").innerHTML = "Ganaste"
+  } else {
+    document.getElementById("resJuego").innerHTML =
+      "Era " + numeroActual
+  }
+}
+
+</script>
+
+</body>
+</html>

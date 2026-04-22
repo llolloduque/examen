@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Juego Hiragana</title>
+
+<style>
+  body {
+    font-family: Arial;
+    text-align: center;
+    margin: 30px;
+  }
+
+  .caja {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px auto;
+    width: 400px;
+    border-radius: 10px;
+  }
+
+  .imagen {
+    width: 200px;
+    height: 150px;
+    line-height: 150px;
+    border: 1px solid black;
+    margin: auto;
+    font-size: 40px;
+    background: #eee;
+  }
+
+  input {
+    padding: 8px;
+    width: 70%;
+  }
+
+  button {
+    padding: 8px;
+    margin: 5px;
+  }
+
+  .resumen {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 70px;
+  }
+</style>
+
+</head>
+<body>
+
+<h2>Juego Hiragana</h2>
+
+<div class="caja">
+
+  <p id="info"></p>
+
+  <div id="imagen" class="imagen">?</div>
+
+  <br>
+
+  <input id="input" placeholder="Escribe la respuesta">
+
+  <br>
+
+  <button onclick="comprobar()">Comprobar</button>
+  <button onclick="resetear()">Resetear</button>
+
+</div>
+
+<div class="caja">
+  <h3>Resumen</h3>
+
+  <div class="resumen">
+    <div class="box">Aciertos<br><span id="aciertos">0</span></div>
+    <div class="box">Fallos<br><span id="fallos">0</span></div>
+    <div class="box">Intentos<br><span id="intentos">0</span></div>
+    <div class="box">Pendientes<br><span id="pendientes">10</span></div>
+  </div>
+
+</div>
+
+<script>
+
+/// ===== DATOS (simulación) =====
+const datos = [
+  { name: "a", simbolo: "あ" },
+  { name: "i", simbolo: "い" },
+  { name: "u", simbolo: "う" },
+  { name: "e", simbolo: "え" },
+  { name: "o", simbolo: "お" },
+  { name: "ka", simbolo: "か" },
+  { name: "ki", simbolo: "き" },
+  { name: "ku", simbolo: "く" },
+  { name: "ke", simbolo: "け" },
+  { name: "ko", simbolo: "こ" }
+]
+
+/// ===== VARIABLES =====
+let indice = 0
+let aciertos = 0
+let fallos = 0
+let intentos = 0
+
+/// ===== CARGAR LOCALSTORAGE =====
+const guardado = JSON.parse(localStorage.getItem("juego"))
+
+if (guardado) {
+  indice = guardado.indice
+  aciertos = guardado.aciertos
+  fallos = guardado.fallos
+  intentos = guardado.intentos
+}
+
+/// ===== MOSTRAR =====
+function mostrar() {
+
+  if (indice >= datos.length) {
+    document.getElementById("imagen").innerHTML = "FIN"
+    document.getElementById("info").innerHTML = "Juego terminado"
+    return
+  }
+
+  document.getElementById("imagen").innerHTML = datos[indice].simbolo
+  document.getElementById("info").innerHTML =
+    "Imagen " + (indice + 1) + " de " + datos.length
+}
+
+/// ===== COMPROBAR =====
+function comprobar() {
+  let valor = document.getElementById("input").value.toLowerCase()
+
+  intentos++
+
+  if (valor === datos[indice].name) {
+    aciertos++
+    indice++
+  } else {
+    fallos++
+  }
+
+  document.getElementById("input").value = ""
+
+  guardar()
+  actualizar()
+  mostrar()
+}
+
+/// ===== ACTUALIZAR UI =====
+function actualizar() {
+  document.getElementById("aciertos").innerHTML = aciertos
+  document.getElementById("fallos").innerHTML = fallos
+  document.getElementById("intentos").innerHTML = intentos
+  document.getElementById("pendientes").innerHTML = datos.length - indice
+}
+
+/// ===== GUARDAR =====
+function guardar() {
+  if (intentos > 0) {
+    localStorage.setItem("juego", JSON.stringify({
+      indice,
+      aciertos,
+      fallos,
+      intentos
+    }))
+  }
+}
+
+/// ===== RESET =====
+function resetear() {
+  localStorage.removeItem("juego")
+
+  indice = 0
+  aciertos = 0
+  fallos = 0
+  intentos = 0
+
+  actualizar()
+  mostrar()
+}
+
+/// ===== INICIO =====
+actualizar()
+mostrar()
+
+</script>
+
+</body>
+</html>
